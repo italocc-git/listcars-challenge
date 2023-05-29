@@ -37,7 +37,7 @@ e armazenado no banco de Dados.
 ### Configuração do Banco de Dados mongoDB
 
 - Com a página do seu cluster aberta, clique em Connect e escolha a opção Connect your application Drivers
-- Anote a URL que aparece no passo 3 (Exemplo: mongodb+srv://italocc16:<password>@cluster0.bfvrbxy.mongodb.net/?retryWrites=true&w=majority) 
+- Anote a URL que aparece no passo 3 (Exemplo: mongodb+srv://italocc16:< password >@cluster0.bfvrbxy.mongodb.net/?retryWrites=true&w=majority) 
 - No lugar de <password> , coloque a senha que foi gerada ao criar o seu usuário (Passo feito na página Security Quickstart)
 - Deixe esse dado salvo que será utilizado no momento da configuração das variáveis de ambiente.
 
