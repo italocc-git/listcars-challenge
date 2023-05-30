@@ -16,7 +16,7 @@ e armazenado no banco de Dados.
  
  # Como executar o projeto (Siga as orientações na ordem)
  
- Pré-requisitos: NPM / YARN instaladas de forma global , Conta no cloud MongoDB 
+ Pré-requisitos: NPM / YARN instaladas de forma global , Conta no cloud MongoDB , Docker
  
  ### Criando conta no MongoDB Cloud
  
@@ -41,7 +41,12 @@ e armazenado no banco de Dados.
 - No lugar de <password> , coloque a senha que foi gerada ao criar o seu usuário (Passo feito na página Security Quickstart)
 - Deixe esse dado salvo que será utilizado no momento da configuração das variáveis de ambiente.
 
-  
+### Configuração do Redis
+ 
+ - O Redis é uma estrutura de armazenamento em memória, muito utilizado como banco de dados e será utilizado nesse projeto para armazenar os registros das filas.
+ - Instale o [Docker](https://www.docker.com/products/docker-desktop/) e com o terminal aberto execute o comando para instalar a imagem do banco de dados redis :  docker run --name redis -d -p 6379:6379 redis:latest
+ - Com esse comando ele irá fazer o download da imagem do redis e iniciar o container no Docker.  
+ 
 ### Clonar Repositório
 - Crie uma pasta com o nome de sua preferência
 - Acesse essa pasta por meio de um terminal e digite o comando abaixo:
@@ -58,7 +63,7 @@ e armazenado no banco de Dados.
 - Feito isso , o seu banco está configurado e pronto para ser utilizado por meio do Prisma ORM  
  
 ### Execute o projeto
-- Com todas as dependências instaladas e banco configurado , execute o projeto com o NPM ou Yarn.
+- Com todas as dependências instaladas e banco configurado , execute o projeto com o comando npm run dev ou yarn dev.
 - Utilize o programa de sua preferência para cadastrar os dados na API externa (Ex : Insomnia ou Postman) 
   
   
