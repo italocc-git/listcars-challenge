@@ -1,7 +1,7 @@
 import { FastifyInstance } from 'fastify';
 import { z } from 'zod';
 import { api } from '../lib/axios'
-import { prisma} from '../lib/prisma'
+import queue from '../lib/queue';
 
 export async function carsRoutes(app : FastifyInstance) {
 
@@ -22,25 +22,36 @@ export async function carsRoutes(app : FastifyInstance) {
             price : z.string(),
             age : z.number()
         })
-        const {title , brand, price , age} = bodySchema.parse(req.body)
-
-        const {data} = await api.post('cars' , {
-            title,
-            brand,
-            price,
-            age
-        })
-        console.log(data)
-        const car_id = data._id
-
-        if(data){
-            await prisma.logs.create({
-                data: {
-                    car_id
-                }
+        try {
+            const {title , brand, price , age} = bodySchema.parse(req.body)
+        
+            const {data} = await api.post('cars' , {
+                title,
+                brand,
+                price,
+                age
             })
+            
+            
+            await queue.add('RegistrationCarWebHook', data)
+
+            return resp.status(201).send(data)
+        
+        }catch(error) {
+            if(error instanceof z.ZodError){
+                const jsonErrorMessage = error.issues.map(issue => ({
+                    field : issue.path[0],
+                    message : issue.message
+                }))
+                return resp.status(400).send(jsonErrorMessage)
+            }
         }
 
-        return resp.status(201).send(data)
+        
+        
+
+       
+
+        
     })
 }

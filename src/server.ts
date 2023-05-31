@@ -1,5 +1,5 @@
-import fastify from 'fastify'
 import 'dotenv/config'
+import fastify from 'fastify'
 import { carsRoutes } from './routes/cars'
 import { logsRoutes } from './routes/logs'
 
