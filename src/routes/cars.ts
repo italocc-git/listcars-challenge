@@ -2,6 +2,7 @@ import { FastifyInstance } from 'fastify';
 import { z } from 'zod';
 import { api } from '../lib/axios'
 import queue from '../lib/queue';
+import { prisma} from '../lib/prisma'
 
 export async function carsRoutes(app : FastifyInstance) {
 
@@ -31,9 +32,19 @@ export async function carsRoutes(app : FastifyInstance) {
                 price,
                 age
             })
-            
-            
-            await queue.add('RegistrationCarWebHook', data)
+
+            if(data){
+                const carId = data._id
+                await prisma.logs.create({
+                    data:{
+                        car_id : carId
+                    }
+            })
+            }
+           
+             
+
+            await queue.add('RegistrationCarWebHook', data) 
 
             return resp.status(201).send(data)
         

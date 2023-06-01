@@ -16,11 +16,20 @@ e armazenado no banco de Dados.
  
  # Como executar o projeto (Siga as orientações na ordem)
  
- Pré-requisitos: NPM / YARN instaladas de forma global , Conta no cloud MongoDB , Docker
- 
- ### Criando conta no MongoDB Cloud
- 
- - Acesse o site : https://www.mongodb.com/
+ Pré-requisitos: NPM / YARN instaladas de forma global ,  Docker
+
+Atenção: Para iniciar o projeto você precisa instalar o banco mongoDB localmente ou remotamente , nos próximos passos eu explico como fazer de ambas as formas.
+Escolha apenas uma forma.
+
+### Utilizando o banco mongoDB localmente .
+ - Para isso você irá precisar do [Docker](https://www.docker.com/products/docker-desktop/) instalado. 
+ - Ao terminar a instalação , certifique-se que você está na pasta do projeto pelo terminal do VS Code ou qualquer outro terminal ('/challenge-cars-list')
+ - digite o comando 'docker-compose up -d '. Com isso será feito automaticamente o download, instalação e inicialização do container challenge-cars-list com o serviço mongo-1 em execução. (Você pode verificar a lista com os containers utilizando o comando : "docker ps -a" ou acessando o aplicativo Docker Desktop)
+ - Agora o seu banco está criado e então basta o prisma gerar a tabela que se encontra no arquivo Schema Prisma, digite o comando : yarn prisma ou npm run prisma.
+ - Feito isso sua tabela será criada e poderá ser sempre acessada no comando mencionado acima 
+
+ ### Utilizando o banco mongoDB Remotamente . 
+ - Crie uma conta gratuitamenteno MongoDB Cloud , acessando o link : https://www.mongodb.com/
  - Clique em Try Free / Start Free
  - Preencha os dados necessários ou faça o cadastro com sua conta Google( Clicando em Sign up with Google)
  - Verifique o seu e-mail e confirme o cadastro.
@@ -46,7 +55,14 @@ e armazenado no banco de Dados.
  - O Redis é uma estrutura de armazenamento em memória, muito utilizado como banco de dados e será utilizado nesse projeto para armazenar os registros das filas.
  - Instale o [Docker](https://www.docker.com/products/docker-desktop/) e com o terminal aberto execute o comando para instalar a imagem do banco de dados redis :  docker run --name redis -d -p 6379:6379 redis:latest
  - Com esse comando ele irá fazer o download da imagem do redis e iniciar o container no Docker.  
+ - Sempre que for iniciar o projeto (Com o comando yarn dev / npm run dev) , certifique-se que o Docker está rodando o container chamado redis.
  
+### Criando websocket 
+ - Acesse o site : https://webhook.site/
+ - Será gerado uma url para testar o websocket , selecione e copie a URL (Localizado em : Your Unique URL).
+ - Altere o valor da variável de ambiente chamada WEBHOOK_URL no arquivo .env.example.
+ - Com o site aberto , fique acompanhando as requisições que serão recebidas sempre que um novo carro for cadastrado.
+
 ### Clonar Repositório
 - Crie uma pasta com o nome de sua preferência
 - Acesse essa pasta por meio de um terminal e digite o comando abaixo:
